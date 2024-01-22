@@ -101,9 +101,18 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 		// get account -> update
 
 		if arg.FromAcc < arg.ToAcc {
-			addMoney(ctx, q, arg.FromAcc, -arg.Amount, arg.ToAcc, arg.Amount)
+			result.FromAcc, result.ToAcc, err = addMoney(ctx, q, arg.FromAcc, -arg.Amount, arg.ToAcc, arg.Amount)
+
+			if err != nil {
+				return err
+			}
+
 		} else {
-			addMoney(ctx, q, arg.ToAcc, arg.Amount, arg.FromAcc, -arg.Amount)
+			result.ToAcc, result.FromAcc, err = addMoney(ctx, q, arg.ToAcc, arg.Amount, arg.FromAcc, -arg.Amount)
+
+			if err != nil {
+				return err
+			}
 		}
 
 		return nil
