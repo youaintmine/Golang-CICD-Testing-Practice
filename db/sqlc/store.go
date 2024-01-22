@@ -53,7 +53,7 @@ type TransferTxResult struct {
 	ToEntry   Entries   `json:"to_entry"`
 }
 
-var txKey = struct{}{}
+// var txKey = struct{}{}
 
 //TransferTx perform money transfer from one account to the other
 //It creates a transfer record, add bank entries, and update accounts'
